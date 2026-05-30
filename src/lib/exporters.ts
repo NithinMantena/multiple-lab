@@ -80,8 +80,9 @@ export function buildSummary(
     lines.push(
       `At ${pct(effectiveR)} discount rate, ${pct(a.stage1ROIC)} ROIC, ${pct(a.stage1ReinvestmentRate)} reinvestment, ${a.stage1Duration}-year high-return period, the business grows at ${pct(a.stage1ROIC * a.stage1ReinvestmentRate)} while paying out ${pct(1 - a.stage1ReinvestmentRate)} of earnings.`,
     );
+    const mosPct = v.marginOfSafetyPercent * 100;
     lines.push(
-      `Under a ${a.businessLife}-year ${a.perpetualBusiness ? "perpetual" : "finite-life"} model these assumptions justify a ${v.justifiedPE.toFixed(1)}x P/E multiple. At the current ${a.currentPE.toFixed(1)}x P/E, the stock is priced ${(((a.currentPE - v.justifiedPE) / v.justifiedPE) * 100).toFixed(1)}% ${a.currentPE >= v.justifiedPE ? "above" : "below"} this assumption set.`,
+      `Under a ${a.businessLife}-year ${a.perpetualBusiness ? "perpetual" : "finite-life"} model these assumptions justify a ${v.justifiedPE.toFixed(1)}x P/E multiple. At the current ${a.currentPE.toFixed(1)}x P/E, the margin of safety is ${mosPct.toFixed(1)}% (${mosPct >= 0 ? "intrinsic above market" : "market above intrinsic"}).`,
     );
   }
   return lines.join("\n");

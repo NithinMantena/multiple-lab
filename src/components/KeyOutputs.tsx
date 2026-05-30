@@ -1,9 +1,9 @@
 import {
-  discountToIntrinsic,
   fmtDollar,
   fmtMultiple,
   fmtPercent,
   fmtSignedPercent,
+  marginOfSafety,
   type AppMode,
   type ModelLevel,
   type ValuationAssumptions,
@@ -35,19 +35,15 @@ export function KeyOutputs({ bundle, assumptions, mode, level }: Props) {
       );
     }
     const intrinsicPE = bundle.valuation.justifiedPE;
-    const purchaseDiscount = discountToIntrinsic(intrinsicPE, assumptions.purchasePE);
-    const purchaseTone: "good" | "error" | "neutral" = !isFinite(purchaseDiscount)
+    const purchaseMOS = marginOfSafety(intrinsicPE, assumptions.purchasePE);
+    const purchaseTone: "good" | "error" | "neutral" = !isFinite(purchaseMOS)
       ? "neutral"
-      : Math.abs(purchaseDiscount) < 0.02
+      : Math.abs(purchaseMOS) < 0.02
       ? "neutral"
-      : purchaseDiscount > 0
+      : purchaseMOS > 0
       ? "good"
       : "error";
-    const purchaseLabel = !isFinite(purchaseDiscount)
-      ? "—"
-      : purchaseDiscount >= 0
-      ? "Discount to intrinsic"
-      : "Premium to intrinsic";
+    const purchaseLabel = !isFinite(purchaseMOS) ? "—" : "Margin of safety";
     return (
       <Section title="Investor Wealth">
         <div className="space-y-4">
@@ -85,7 +81,7 @@ export function KeyOutputs({ bundle, assumptions, mode, level }: Props) {
                       : "text-ink-800"
                   }`}
                 >
-                  {fmtSignedPercent(purchaseDiscount, 1)}
+                  {fmtSignedPercent(purchaseMOS, 1)}
                 </p>
               </div>
             </div>
@@ -153,22 +149,15 @@ export function KeyOutputs({ bundle, assumptions, mode, level }: Props) {
       </Section>
     );
   }
-  const discount = discountToIntrinsic(
-    valuation.justifiedPE,
-    valuation.currentPE,
-  );
-  const discountTone: "good" | "error" | "neutral" = !isFinite(discount)
+  const mos = marginOfSafety(valuation.justifiedPE, valuation.currentPE);
+  const mosTone: "good" | "error" | "neutral" = !isFinite(mos)
     ? "neutral"
-    : Math.abs(discount) < 0.02
+    : Math.abs(mos) < 0.02
     ? "neutral"
-    : discount > 0
+    : mos > 0
     ? "good"
     : "error";
-  const discountLabel = !isFinite(discount)
-    ? "—"
-    : discount >= 0
-    ? "Discount to intrinsic"
-    : "Premium to intrinsic";
+  const mosLabel = !isFinite(mos) ? "—" : "Margin of safety";
 
   return (
     <Section title="Justified Multiple">
@@ -183,8 +172,8 @@ export function KeyOutputs({ bundle, assumptions, mode, level }: Props) {
         </div>
         <div className="flex flex-wrap items-center gap-3 text-sm">
           <Stat label="Current P/E" value={fmtMultiple(valuation.currentPE)} />
-          <Pill tone={discountTone}>
-            {discountLabel} {fmtSignedPercent(discount)}
+          <Pill tone={mosTone}>
+            {mosLabel} {fmtSignedPercent(mos)}
           </Pill>
         </div>
         <div className="grid grid-cols-2 gap-3 text-sm">

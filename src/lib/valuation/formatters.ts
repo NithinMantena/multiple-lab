@@ -30,15 +30,15 @@ export function fmtSignedPercent(n: number, digits = 1): string {
 }
 
 /**
- * Margin-of-safety style measure: positive means market price sits below
- * intrinsic value (a discount); negative means it sits above (a premium).
+ * Margin of safety: positive means intrinsic value sits above market price;
+ * negative means market price sits above intrinsic value.
  *
- *   discount = (intrinsic − market) / intrinsic
+ *   marginOfSafety = intrinsic / market − 1
  */
-export function discountToIntrinsic(
+export function marginOfSafety(
   intrinsic: number,
   market: number,
 ): number {
-  if (!isFinite(intrinsic) || intrinsic <= 0) return NaN;
-  return (intrinsic - market) / intrinsic;
+  if (!isFinite(intrinsic) || !isFinite(market) || market <= 0) return NaN;
+  return intrinsic / market - 1;
 }

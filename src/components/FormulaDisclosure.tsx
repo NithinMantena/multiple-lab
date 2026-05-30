@@ -53,6 +53,9 @@ FVPayout[t] = Payout[t] × (1 + ExtReturn)^(H − t)   if "reinvest externally"
 EndingStockValue = Earnings[H] × ExitPE
 EndingWealth = EndingStockValue + Σ FVPayout[t]
 InvestorIRR = (EndingWealth / PurchasePrice)^(1/H) − 1`}</pre>
+          <pre className="whitespace-pre-wrap">{`Margin of Safety:
+MarginOfSafety = JustifiedPE / CurrentPE − 1
+(positive: intrinsic value above market; negative: market above intrinsic value)`}</pre>
           <p className="text-ink-500 not-italic font-sans text-xs">
             Note: Company intrinsic value (Justified P/E) excludes external
             reinvestment of payouts. Shareholder Wealth includes external

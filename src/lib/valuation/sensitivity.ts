@@ -19,7 +19,7 @@ export type SensitivityVariable =
 
 export type SensitivityCellMetric =
   | "justifiedPE"
-  | "impliedGapPercent"
+  | "marginOfSafetyPercent"
   | "investorIRR"
   | "endingWealth";
 
@@ -105,7 +105,7 @@ function compute(
       ? calculateROICModel(a)
       : calculateROICModel(a);
   if (r.errors.length > 0) return NaN;
-  return metric === "justifiedPE" ? r.justifiedPE : r.impliedGapPercent;
+  return metric === "justifiedPE" ? r.justifiedPE : r.marginOfSafetyPercent;
 }
 
 export function buildSensitivityTable(

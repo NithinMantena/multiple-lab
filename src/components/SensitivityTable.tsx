@@ -37,7 +37,7 @@ const VAR_LABELS: Record<SensitivityVariable, string> = {
 
 const METRIC_LABELS: Record<SensitivityCellMetric, string> = {
   justifiedPE: "Justified P/E",
-  impliedGapPercent: "Implied gap %",
+  marginOfSafetyPercent: "Margin of safety %",
   investorIRR: "Investor IRR",
   endingWealth: "Ending wealth",
 };
@@ -157,7 +157,7 @@ export function SensitivityTable({ assumptions, level, mode }: Props) {
         ]
       : [
           { value: "justifiedPE", label: "Justified P/E" },
-          { value: "impliedGapPercent", label: "Implied gap %" },
+          { value: "marginOfSafetyPercent", label: "Margin of safety %" },
         ];
 
   const currentPE = assumptions.currentPE;

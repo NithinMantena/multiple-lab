@@ -88,11 +88,12 @@ export function Intro({ onStart, alreadySeen }: Props) {
               the P/E that those inputs justify. It also compares that
               justified multiple against the current market multiple and
               expresses the difference as a{" "}
-              <span className="font-medium">discount or a premium to
-              intrinsic value</span>. A positive discount indicates that the
-              market is offering the business below what your assumptions say
-              it is worth, and a negative number means the market is asking
-              you to pay more than your view supports.
+              <span className="font-medium">margin of safety</span>, computed
+              as intrinsic value divided by market price, minus one. A
+              positive margin of safety indicates that the market is offering
+              the business below what your assumptions say it is worth, and
+              a negative one means the market is asking you to pay more than
+              your view supports.
             </p>
           </div>
 

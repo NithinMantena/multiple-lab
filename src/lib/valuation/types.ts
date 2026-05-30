@@ -65,7 +65,7 @@ export interface ValueByPeriod {
 export interface ValuationResult {
   justifiedPE: number;
   currentPE: number;
-  impliedGapPercent: number;
+  marginOfSafetyPercent: number;
 
   stage1Growth: number;
   stage1PayoutRatio: number;

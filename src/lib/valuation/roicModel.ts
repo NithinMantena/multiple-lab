@@ -140,8 +140,8 @@ export function calculateROICModel(a: ValuationAssumptions): ValuationResult {
   );
 
   const justifiedPE = pvTotal / e0;
-  const impliedGap =
-    a.currentPE > 0 ? (justifiedPE - a.currentPE) / a.currentPE : 0;
+  const marginOfSafetyPercent =
+    a.currentPE > 0 ? justifiedPE / a.currentPE - 1 : 0;
 
   if (roic1 > 1)
     warnings.push("Stage 1 ROIC above 100% is unusually aggressive.");
@@ -167,7 +167,7 @@ export function calculateROICModel(a: ValuationAssumptions): ValuationResult {
   return {
     justifiedPE,
     currentPE: a.currentPE,
-    impliedGapPercent: impliedGap,
+    marginOfSafetyPercent,
     stage1Growth: roic1 * rr1,
     stage1PayoutRatio: 1 - rr1,
     matureGrowth: g2,
@@ -187,7 +187,7 @@ function emptyResult(currentPE: number, errors: string[]): ValuationResult {
   return {
     justifiedPE: 0,
     currentPE,
-    impliedGapPercent: 0,
+    marginOfSafetyPercent: 0,
     stage1Growth: 0,
     stage1PayoutRatio: 0,
     matureGrowth: 0,

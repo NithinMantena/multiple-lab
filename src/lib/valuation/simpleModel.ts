@@ -127,8 +127,8 @@ export function calculateSimpleModel(
     });
 
   const justifiedPE = pvTotal / e0;
-  const impliedGap =
-    a.currentPE > 0 ? (justifiedPE - a.currentPE) / a.currentPE : 0;
+  const marginOfSafetyPercent =
+    a.currentPE > 0 ? justifiedPE / a.currentPE - 1 : 0;
 
   if (gT > 0.05)
     warnings.push("Long-term mature growth above 5% may be aggressive.");
@@ -148,7 +148,7 @@ export function calculateSimpleModel(
   return {
     justifiedPE,
     currentPE: a.currentPE,
-    impliedGapPercent: impliedGap,
+    marginOfSafetyPercent,
     stage1Growth: g1,
     stage1PayoutRatio: payout,
     matureGrowth: gT,
@@ -172,7 +172,7 @@ function emptyResult(
   return {
     justifiedPE: 0,
     currentPE,
-    impliedGapPercent: 0,
+    marginOfSafetyPercent: 0,
     stage1Growth: 0,
     stage1PayoutRatio: 0,
     matureGrowth: 0,
