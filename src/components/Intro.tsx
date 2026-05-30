@@ -11,7 +11,7 @@ export function Intro({ onStart, alreadySeen }: Props) {
           <div>
             <h1 className="text-lg font-semibold tracking-tight">Multiple Lab</h1>
             <p className="text-xs text-ink-500 leading-snug">
-              A small valuation tool for thinking about earnings multiples.
+              A valuation tool for thinking about earnings multiples.
             </p>
           </div>
           {alreadySeen ? (
@@ -35,7 +35,7 @@ export function Intro({ onStart, alreadySeen }: Props) {
             risk involved), it returns the earnings multiple that those
             assumptions justify. Run in reverse, given today's market
             multiple, it returns the assumptions the market is currently
-            pricing in. That is the entirety of what it does.
+            pricing in.
           </p>
         </section>
 
