@@ -28,3 +28,17 @@ export function fmtSignedPercent(n: number, digits = 1): string {
   const sign = n > 0 ? "+" : "";
   return `${sign}${(n * 100).toFixed(digits)}%`;
 }
+
+/**
+ * Margin-of-safety style measure: positive means market price sits below
+ * intrinsic value (a discount); negative means it sits above (a premium).
+ *
+ *   discount = (intrinsic − market) / intrinsic
+ */
+export function discountToIntrinsic(
+  intrinsic: number,
+  market: number,
+): number {
+  if (!isFinite(intrinsic) || intrinsic <= 0) return NaN;
+  return (intrinsic - market) / intrinsic;
+}

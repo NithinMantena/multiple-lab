@@ -1,6 +1,7 @@
 import { useAssumptions } from "./hooks/useAssumptions";
 import { useValuation } from "./hooks/useValuation";
 import { AppHeader } from "./components/Header";
+import { Intro } from "./components/Intro";
 import { InputPanel } from "./components/InputPanel";
 import { KeyOutputs } from "./components/KeyOutputs";
 import { ExplanationText } from "./components/ExplanationText";
@@ -26,13 +27,25 @@ export default function App() {
     assumptions,
     modelLevel,
     mode,
+    view,
+    hasSeenIntro,
     setField,
     setModelLevel,
     setMode,
+    setView,
     resetToDefaults,
     saveAsDefaults,
   } = useAssumptions();
   const bundle = useValuation(assumptions, modelLevel);
+
+  if (view === "intro") {
+    return (
+      <Intro
+        onStart={() => setView("calculator")}
+        alreadySeen={hasSeenIntro}
+      />
+    );
+  }
 
   const isWealth = mode === "shareholderWealth";
   const yearlyRows = isWealth
@@ -61,7 +74,11 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-ink-50/30">
-      <AppHeader onReset={resetToDefaults} onSaveDefaults={saveAsDefaults} />
+      <AppHeader
+        onReset={resetToDefaults}
+        onSaveDefaults={saveAsDefaults}
+        onShowIntro={() => setView("intro")}
+      />
 
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-4">
         <div className="flex flex-wrap items-center gap-3 mb-4">

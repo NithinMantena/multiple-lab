@@ -8,43 +8,41 @@ import {
 
 const STORAGE_KEY = "multiple-lab:state:v1";
 
+export type AppView = "intro" | "calculator";
+
 interface PersistedState {
   assumptions: ValuationAssumptions;
   modelLevel: ModelLevel;
   mode: AppMode;
   defaults?: Partial<ValuationAssumptions>;
+  view: AppView;
+  hasSeenIntro: boolean;
 }
 
 function loadInitial(): PersistedState {
-  if (typeof window === "undefined") {
-    return {
-      assumptions: DEFAULT_ASSUMPTIONS,
-      modelLevel: "roic",
-      mode: "justifiedMultiple",
-    };
-  }
+  const base: PersistedState = {
+    assumptions: DEFAULT_ASSUMPTIONS,
+    modelLevel: "roic",
+    mode: "justifiedMultiple",
+    view: "intro",
+    hasSeenIntro: false,
+  };
+  if (typeof window === "undefined") return base;
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
-    if (!raw) {
-      return {
-        assumptions: DEFAULT_ASSUMPTIONS,
-        modelLevel: "roic",
-        mode: "justifiedMultiple",
-      };
-    }
+    if (!raw) return base;
     const parsed = JSON.parse(raw) as Partial<PersistedState>;
+    const hasSeenIntro = parsed.hasSeenIntro ?? false;
     return {
       assumptions: { ...DEFAULT_ASSUMPTIONS, ...(parsed.assumptions ?? {}) },
       modelLevel: parsed.modelLevel ?? "roic",
       mode: parsed.mode ?? "justifiedMultiple",
       defaults: parsed.defaults,
+      hasSeenIntro,
+      view: hasSeenIntro ? "calculator" : "intro",
     };
   } catch {
-    return {
-      assumptions: DEFAULT_ASSUMPTIONS,
-      modelLevel: "roic",
-      mode: "justifiedMultiple",
-    };
+    return base;
   }
 }
 
@@ -105,6 +103,14 @@ export function useAssumptions() {
     }));
   }, []);
 
+  const setView = useCallback((view: AppView) => {
+    setState((prev) => ({
+      ...prev,
+      view,
+      hasSeenIntro: view === "calculator" ? true : prev.hasSeenIntro,
+    }));
+  }, []);
+
   const saveAsDefaults = useCallback(() => {
     setState((prev) => ({
       ...prev,
@@ -125,10 +131,13 @@ export function useAssumptions() {
       modelLevel: state.modelLevel,
       mode: state.mode,
       defaults: state.defaults,
+      view: state.view,
+      hasSeenIntro: state.hasSeenIntro,
       setField,
       setAssumptions,
       setModelLevel,
       setMode,
+      setView,
       resetToDefaults,
       saveAsDefaults,
     }),
@@ -138,6 +147,7 @@ export function useAssumptions() {
       setAssumptions,
       setModelLevel,
       setMode,
+      setView,
       resetToDefaults,
       saveAsDefaults,
     ],

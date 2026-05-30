@@ -1,9 +1,11 @@
 export function AppHeader({
   onReset,
   onSaveDefaults,
+  onShowIntro,
 }: {
   onReset: () => void;
   onSaveDefaults: () => void;
+  onShowIntro: () => void;
 }) {
   return (
     <header className="border-b border-ink-200 bg-white">
@@ -15,6 +17,12 @@ export function AppHeader({
           </p>
         </div>
         <div className="flex items-center gap-2">
+          <button
+            onClick={onShowIntro}
+            className="text-xs px-2.5 py-1 rounded border border-ink-200 text-ink-600 hover:bg-ink-50"
+          >
+            About / Help
+          </button>
           <button
             onClick={onSaveDefaults}
             className="text-xs px-2.5 py-1 rounded border border-ink-200 text-ink-600 hover:bg-ink-50"

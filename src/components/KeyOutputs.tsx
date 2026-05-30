@@ -1,4 +1,5 @@
 import {
+  discountToIntrinsic,
   fmtDollar,
   fmtMultiple,
   fmtPercent,
@@ -33,6 +34,20 @@ export function KeyOutputs({ bundle, assumptions, mode, level }: Props) {
         </Section>
       );
     }
+    const intrinsicPE = bundle.valuation.justifiedPE;
+    const purchaseDiscount = discountToIntrinsic(intrinsicPE, assumptions.purchasePE);
+    const purchaseTone: "good" | "error" | "neutral" = !isFinite(purchaseDiscount)
+      ? "neutral"
+      : Math.abs(purchaseDiscount) < 0.02
+      ? "neutral"
+      : purchaseDiscount > 0
+      ? "good"
+      : "error";
+    const purchaseLabel = !isFinite(purchaseDiscount)
+      ? "—"
+      : purchaseDiscount >= 0
+      ? "Discount to intrinsic"
+      : "Premium to intrinsic";
     return (
       <Section title="Investor Wealth">
         <div className="space-y-4">
@@ -44,6 +59,45 @@ export function KeyOutputs({ bundle, assumptions, mode, level }: Props) {
               {fmtPercent(wealth.investorIRR, 2)}
             </p>
           </div>
+
+          <div className="rounded-md bg-ink-50/60 border border-ink-200 p-3">
+            <p className="text-xs uppercase tracking-wide text-ink-500 mb-1.5">
+              Purchase price vs intrinsic value
+            </p>
+            <div className="grid grid-cols-3 gap-3 text-sm">
+              <Stat
+                label="Purchase P/E"
+                value={fmtMultiple(assumptions.purchasePE)}
+              />
+              <Stat
+                label="Intrinsic P/E"
+                value={fmtMultiple(intrinsicPE)}
+                hint="From your ROIC assumptions"
+              />
+              <div>
+                <p className="text-xs text-ink-500">{purchaseLabel}</p>
+                <p
+                  className={`tabular-nums font-semibold ${
+                    purchaseTone === "good"
+                      ? "text-emerald-700"
+                      : purchaseTone === "error"
+                      ? "text-red-700"
+                      : "text-ink-800"
+                  }`}
+                >
+                  {fmtSignedPercent(purchaseDiscount, 1)}
+                </p>
+              </div>
+            </div>
+            {bundle.valuation.errors.length === 0 ? (
+              <p className="text-[11px] text-ink-500 mt-2 leading-snug">
+                Intrinsic value reflects the company's distributable cash at
+                current ROIC / reinvestment / discount-rate assumptions and
+                excludes external reinvestment of payouts.
+              </p>
+            ) : null}
+          </div>
+
           <div className="grid grid-cols-2 gap-3 text-sm">
             <Stat
               label="Ending wealth"
@@ -99,10 +153,22 @@ export function KeyOutputs({ bundle, assumptions, mode, level }: Props) {
       </Section>
     );
   }
-  const gap = valuation.impliedGapPercent;
-  const gapTone: "good" | "error" | "neutral" =
-    Math.abs(gap) < 0.02 ? "neutral" : gap > 0 ? "good" : "error";
-  const gapLabel = gap >= 0 ? "Undervalued vs current" : "Overvalued vs current";
+  const discount = discountToIntrinsic(
+    valuation.justifiedPE,
+    valuation.currentPE,
+  );
+  const discountTone: "good" | "error" | "neutral" = !isFinite(discount)
+    ? "neutral"
+    : Math.abs(discount) < 0.02
+    ? "neutral"
+    : discount > 0
+    ? "good"
+    : "error";
+  const discountLabel = !isFinite(discount)
+    ? "—"
+    : discount >= 0
+    ? "Discount to intrinsic"
+    : "Premium to intrinsic";
 
   return (
     <Section title="Justified Multiple">
@@ -117,8 +183,8 @@ export function KeyOutputs({ bundle, assumptions, mode, level }: Props) {
         </div>
         <div className="flex flex-wrap items-center gap-3 text-sm">
           <Stat label="Current P/E" value={fmtMultiple(valuation.currentPE)} />
-          <Pill tone={gapTone}>
-            {gapLabel} {fmtSignedPercent(gap)}
+          <Pill tone={discountTone}>
+            {discountLabel} {fmtSignedPercent(discount)}
           </Pill>
         </div>
         <div className="grid grid-cols-2 gap-3 text-sm">
