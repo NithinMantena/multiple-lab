@@ -35,9 +35,7 @@ export function Intro({ onStart, alreadySeen }: Props) {
             risk involved), it returns the earnings multiple that those
             assumptions justify. Run in reverse, given today's market
             multiple, it returns the assumptions the market is currently
-            pricing in. That is the entirety of what it does. We use it
-            ourselves in our research process, and thought it might be
-            useful to put a version of it online for a few friends.
+            pricing in. That is the entirety of what it does.
           </p>
         </section>
 
@@ -46,11 +44,11 @@ export function Intro({ onStart, alreadySeen }: Props) {
             Why a multiple alone hides more than it shows
           </h2>
           <p>
-            A P/E ratio compresses a great deal of information into a single
+            A P/E ratio compresses a significant amount of information into a single
             number. That compression is convenient for screening, but it
             tends to hide exactly the things that matter most to a long-term
             investor. Two businesses can both trade at 25x earnings while
-            being entirely different propositions underneath. One of them
+            being entirely different businesses underneath. One of them
             may earn 40% on incremental capital and reinvest only a small
             fraction of its earnings to grow, paying the rest out to owners.
             The other may earn 8% on capital and have to reinvest every
@@ -138,114 +136,9 @@ export function Intro({ onStart, alreadySeen }: Props) {
           </p>
         </section>
 
-        <section className="space-y-3">
-          <h2 className="text-xl font-semibold tracking-tight">
-            How we use it
-          </h2>
-          <p>
-            In practice, here is roughly the order of operations that we
-            follow when we are using the tool to test a company against
-            our view.
-          </p>
-          <p>
-            We start in ROIC / Reinvestment mode with our honest view of
-            the business. The Stage 1 inputs (ROIC, reinvestment rate,
-            duration) capture the period during which we expect the
-            company to earn returns meaningfully above its cost of
-            capital, and the mature inputs capture what the business
-            settles into after competition has compressed those returns.
-            We set the discount rate based on the risk profile of the
-            company and the prevailing rate environment.
-          </p>
-          <p>
-            We then look at two outputs. The first is the justified P/E,
-            which is the headline number. The second is the discount-to-
-            intrinsic pill next to it, which tells us in one number
-            whether the market is offering the business at a discount, at
-            roughly fair value, or at a premium, all relative to the
-            assumptions we just entered.
-          </p>
-          <p>
-            If the discount or premium looks large, we move down the page
-            to the sensitivity table and try to identify which assumption
-            our conclusion most depends on. A justified P/E that swings
-            substantially with a one-point change in ROIC is a justified
-            P/E that we should not place much confidence in. When a small
-            change in input produces a large change in output, we have not
-            really learned anything new about the company; we have only
-            translated one guess into another.
-          </p>
-          <p>
-            When we suspect that the market is pricing in something we
-            have not, we move to Implied Assumptions and let the solver
-            back into what the market needs to be true. If the answer is
-            something the business can plausibly deliver, we take that as
-            evidence that the market is being roughly reasonable. If the
-            answer is implausible (for instance, the market needing the
-            business to earn 60% on incremental capital for fifteen
-            consecutive years), then either we have found a meaningfully
-            mispriced security or we are missing something material about
-            the company that other investors understand and we do not.
-          </p>
-          <p>
-            For dividend payers, share-repurchase-heavy companies, or any
-            company where capital returned to shareholders is expected to
-            be a material fraction of total return, we switch to
-            Shareholder Wealth and look at the IRR breakdown. The
-            attribution is the most useful part of that view: if our IRR
-            is coming mostly from a multiple expanding rather than from
-            the business's own economics, then we are not really
-            investing in the company. We are betting on what other
-            investors will be willing to pay for it later, which is a
-            very different exercise.
-          </p>
-        </section>
-
-        <section className="space-y-3">
-          <h2 className="text-xl font-semibold tracking-tight">
-            What this tool does not do
-          </h2>
-          <p>
-            There are a number of things that this tool is not intended to
-            do, and it is worth being explicit about them. It is not a
-            substitute for a three-statement model. It is not a screener,
-            and it will not generate investment ideas on its own. It
-            cannot evaluate the quality of management, the durability of
-            the moat, or the realism of the cash flows that you have
-            projected. Those are all far harder questions, and the only
-            way we know to answer them is by reading annual reports
-            carefully, talking to operators and competitors, building
-            relationships with management teams over time, and being
-            wrong in expensive ways over many years. What this tool does
-            is take the answers you have already worked out about a
-            business and show you what those answers add up to in terms
-            of the multiple they justify.
-          </p>
-        </section>
-
-        <section className="space-y-3">
-          <h2 className="text-xl font-semibold tracking-tight">
-            A few practical notes
-          </h2>
-          <p>
-            Every calculation runs locally in your browser, and nothing is
-            sent to a server. Your assumptions are saved in your browser's
-            local storage, so closing the tab is safe, but using the tool
-            on a different device will reset the inputs to defaults. There
-            is a collapsible section at the bottom of the calculator
-            called "How this is calculated" that shows every underlying
-            formula the tool uses, so that nothing about the math is
-            hidden. The year-by-year projection can be exported as a CSV,
-            and the written summary of the assumptions and results can be
-            copied to your clipboard for use in your own notes.
-          </p>
-        </section>
+        
 
         <div className="pt-6 border-t border-ink-200 space-y-3">
-          <p>
-            That covers what the tool does and how we use it. The rest is
-            in the calculator itself.
-          </p>
           <p className="text-sm text-ink-500">Best, Nithin</p>
           <button
             onClick={onStart}
