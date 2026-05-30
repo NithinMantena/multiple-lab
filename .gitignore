@@ -8,6 +8,11 @@ dist-ssr
 .env.*.local
 .vite
 
+# tsc -b build artifacts
+*.tsbuildinfo
+vite.config.d.ts
+vite.config.js
+
 .idea
 .vscode
 *.suo
