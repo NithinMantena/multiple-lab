@@ -11,7 +11,7 @@ export function Intro({ onStart, alreadySeen }: Props) {
           <div>
             <h1 className="text-lg font-semibold tracking-tight">Multiple Lab</h1>
             <p className="text-xs text-ink-500 leading-snug">
-              Reverse-engineer the assumptions embedded in an earnings multiple.
+              A small valuation tool for thinking about earnings multiples.
             </p>
           </div>
           {alreadySeen ? (
@@ -25,131 +25,41 @@ export function Intro({ onStart, alreadySeen }: Props) {
         </div>
       </header>
 
-      <main className="max-w-3xl mx-auto px-4 sm:px-6 py-10 space-y-9 text-ink-800 leading-relaxed">
+      <main className="max-w-3xl mx-auto px-4 sm:px-6 py-10 space-y-8 text-ink-800 leading-relaxed">
         <section className="space-y-3">
-          <p className="text-ink-600 italic">
-            A short note before you start.
-          </p>
           <p>
-            When you buy a share of a publicly traded company, you are not
-            buying a piece of paper. You are buying a legally binding claim
-            on the cash that business can hand back to its owners over time.
-            The value of that share, regardless of what anyone tells you, is
-            the present value of those future cash flows, adjusted for risk.
-            Everything else — multiples, growth narratives, EBITDA arithmetic,
-            the talking head on TV with a price target — is shorthand.
-          </p>
-          <p>
-            A P/E ratio is one of those shorthands. It compresses dozens of
-            assumptions into a single number: how fast the business can grow,
-            how much capital it has to consume to do it, how long the moat
-            lasts, what discount rate is fair. Useful for screening. Dangerous
-            to lean on. A 35x multiple is not "expensive" and a 10x multiple
-            is not "cheap." Whether they are expensive or cheap depends on
-            what the multiple is asking you to believe.
-          </p>
-          <p>
-            This tool exists to make those assumptions explicit.
+            The tool that this page introduces does a single job. Given your
+            assumptions about a business (how fast its earnings can grow, how
+            much capital it has to reinvest to grow at that rate, how long it
+            can keep doing so, and what discount rate is appropriate for the
+            risk involved), it returns the earnings multiple that those
+            assumptions justify. Run in reverse, given today's market
+            multiple, it returns the assumptions the market is currently
+            pricing in. That is the entirety of what it does. We use it
+            ourselves in our research process, and thought it might be
+            useful to put a version of it online for a few friends.
           </p>
         </section>
 
         <section className="space-y-3">
           <h2 className="text-xl font-semibold tracking-tight">
-            On intrinsic value
+            Why a multiple alone hides more than it shows
           </h2>
           <p>
-            Charlie Munger put it best: <em>all intelligent investing is value
-            investing</em>. The dichotomy financial media draws between
-            "value" and "growth" is contrived. Growth is one input to value.
-            A high-growth company with no moat and a 5% return on capital is
-            a poor business. A no-growth company that produces an enormous
-            stream of cash for two more decades may be a great one.
-          </p>
-          <p>
-            To estimate intrinsic value you only need three things:
-          </p>
-          <ul className="list-disc pl-5 space-y-1 marker:text-ink-400">
-            <li>the current cash flows of the business,</li>
-            <li>how those cash flows will grow, and</li>
-            <li>the risk of those cash flows.</li>
-          </ul>
-          <p>
-            Everything in this app — the three model levels, the sensitivity
-            tables, the solver — is a way of pressing on those three numbers.
-          </p>
-        </section>
-
-        <section className="space-y-3">
-          <h2 className="text-xl font-semibold tracking-tight">
-            On margin of safety
-          </h2>
-          <p>
-            Once you have an intrinsic value, the next question is how big a
-            discount to it you need before you'll act. Seth Klarman calls
-            this the margin of safety: buying a dollar for fifty cents. You
-            need that gap because your assumptions will be wrong in places
-            you can't yet see. The larger the gap, the more room you have to
-            be wrong and still come out fine.
-          </p>
-          <p>
-            That is why every screen in this app shows a{" "}
-            <span className="font-medium">discount or premium to intrinsic</span>{" "}
-            — the gap between what the market is asking and what your
-            assumptions justify. On the Shareholder Wealth tab it compares
-            the price you'd actually pay against the intrinsic P/E your
-            assumptions imply. Positive means a discount. Negative means
-            you're paying up.
-          </p>
-        </section>
-
-        <section className="space-y-3">
-          <h2 className="text-xl font-semibold tracking-tight">
-            Why ROIC matters more than growth
-          </h2>
-          <p>
-            Two businesses can both grow earnings at 10% a year. One earns
-            50% on incremental capital and reinvests just 20% of its
-            earnings — handing the other 80% to owners. The other earns 10%
-            on capital and must reinvest every dollar of earnings just to
-            grow at all. They look identical on a screener. They are not the
-            same business.
-          </p>
-          <p>
-            The first is a compounder. The second is a treadmill. The default
-            model in this app derives growth honestly from the underlying
-            economics —{" "}
-            <code className="bg-ink-100 px-1 rounded text-[12px]">
-              growth = ROIC × reinvestment rate
-            </code>{" "}
-            — and whatever the business does not reinvest becomes owner cash
-            flow. This is the most honest way to tell those two businesses
-            apart.
-          </p>
-        </section>
-
-        <section className="space-y-3">
-          <h2 className="text-xl font-semibold tracking-tight">
-            Where will the cash go on the way to me?
-          </h2>
-          <p>
-            There is a quieter question that I have learned, painfully,
-            matters as much as <em>will this business produce cash</em>: where
-            does that cash go on the way to me? A great business with
-            mediocre capital allocation can quietly destroy your return.
-            Shareholders' capital is a more elastic concept in practice than
-            it looks on paper.
-          </p>
-          <p>
-            This app cannot evaluate management for you. But by keeping{" "}
-            <span className="font-medium">company intrinsic value</span> (what
-            the business can pay out) separate from{" "}
-            <span className="font-medium">shareholder wealth</span> (what you
-            actually end up with after the dividends are reinvested somewhere
-            else), it forces you to take a real position on what management
-            will do with the money. If Coca-Cola hands you a dollar and you
-            put that dollar into Progressive at 10%, the 10% belongs to{" "}
-            <em>your portfolio</em>, not Coke's economics. The two should
-            never be muddled.
+            A P/E ratio compresses a great deal of information into a single
+            number. That compression is convenient for screening, but it
+            tends to hide exactly the things that matter most to a long-term
+            investor. Two businesses can both trade at 25x earnings while
+            being entirely different propositions underneath. One of them
+            may earn 40% on incremental capital and reinvest only a small
+            fraction of its earnings to grow, paying the rest out to owners.
+            The other may earn 8% on capital and have to reinvest every
+            dollar of earnings just to maintain its competitive position.
+            Looking only at the multiple, an investor would not be able to
+            tell those two businesses apart, even though the first is a
+            compounder and the second is a treadmill. The point of this
+            tool is to make the assumptions underneath a multiple explicit
+            enough that the difference between the two becomes obvious.
           </p>
         </section>
 
@@ -157,127 +67,191 @@ export function Intro({ onStart, alreadySeen }: Props) {
           <h2 className="text-xl font-semibold tracking-tight">
             The three modes
           </h2>
-          <p>Pick the mode that matches the question you're asking.</p>
-          <div className="space-y-3 text-sm">
-            <div>
-              <p className="font-medium text-base">Justified Multiple</p>
-              <p className="text-ink-700">
-                You hold a view of the business. What multiple does it
-                deserve? Set ROIC, reinvestment, duration, discount rate; the
-                app returns the P/E those assumptions justify and tells you
-                whether the market is offering a discount or a premium.
-              </p>
-            </div>
-            <div>
-              <p className="font-medium text-base">Implied Assumptions</p>
-              <p className="text-ink-700">
-                You see today's multiple. What is the market asking you to
-                believe? Pick a variable — ROIC, reinvestment rate, duration,
-                discount rate — and the tool solves for the value that makes
-                the current multiple fair. Then the only question left is:{" "}
-                <em>do you believe that?</em>
-              </p>
-            </div>
-            <div>
-              <p className="font-medium text-base">Shareholder Wealth</p>
-              <p className="text-ink-700">
-                You're thinking about total return. Buy at this multiple,
-                exit at that one in N years, reinvest payouts at some rate,
-                see your IRR. The return is then attributed: how much came
-                from earnings growth, how much from the multiple changing,
-                how much from cash you received and put to work elsewhere.
-              </p>
-            </div>
-          </div>
+          <p>
+            There are three modes that you can switch between using the
+            toggles at the top of the calculator. Each one is built around
+            a different question.
+          </p>
+          <p>
+            The first mode, Justified Multiple, is where most of the work
+            gets done. You enter your view of the business (your estimate
+            of its incremental return on capital, the fraction of earnings
+            it needs to reinvest to sustain that return, how long the
+            high-return Stage 1 period continues, and your chosen discount
+            rate), and the tool returns the P/E that those inputs justify.
+            It also compares that justified multiple against the current
+            market multiple and expresses the difference as a discount or a
+            premium to intrinsic value. A positive discount indicates that
+            the market is offering the business below what your assumptions
+            say it is worth, and a negative number means the market is
+            asking you to pay more than your view supports.
+          </p>
+          <p>
+            The second mode, Implied Assumptions, runs the same model in
+            reverse. You enter today's market multiple, choose a variable
+            to solve for (such as ROIC, reinvestment rate, Stage 1
+            duration, discount rate, mature ROIC, or mature reinvestment
+            rate), and the tool solves for the value of that variable that
+            would make the current multiple fair. This is useful for asking
+            the question, "What is the market asking me to believe at
+            today's price?" Whether that belief is reasonable is, of
+            course, a separate question, and one you have to answer
+            yourself.
+          </p>
+          <p>
+            The third mode, Shareholder Wealth, takes the perspective of
+            an investor buying the company and holding it for some number
+            of years. You enter the multiple you would pay today, the
+            multiple you would accept on exit, the holding period, and the
+            rate at which you would reinvest payouts received along the
+            way. The tool returns an investor IRR and breaks that return
+            down into its parts, showing how much came from earnings
+            growth, how much from the change in multiple, how much from
+            the payouts themselves, and how much from your external
+            reinvestment of those payouts. We use this mode for dividend
+            payers, repurchase-heavy companies, and any situation in which
+            we want to keep the company's underlying economics distinct
+            from our own portfolio's reinvestment decisions.
+          </p>
         </section>
 
         <section className="space-y-3">
           <h2 className="text-xl font-semibold tracking-tight">
-            How I use it
+            The default model and the simple alternative
           </h2>
-          <ol className="list-decimal pl-5 space-y-2 marker:text-ink-400">
-            <li>
-              Start in <span className="font-medium">ROIC / Reinvestment</span>.
-              Put in your honest view of the company — incremental ROIC, what
-              fraction of earnings the business must reinvest to maintain
-              that ROIC, and how long you think the moat lets it last.
-              Stage 1 duration is your view of how long the business can
-              clear its 7-foot hurdles before competition catches up.
-            </li>
-            <li>
-              Look at the justified P/E and the discount-to-intrinsic pill.
-              That's the picture in one glance. If the discount is small or
-              negative, the market is already paying for your view; you need
-              either a better view or a better price.
-            </li>
-            <li>
-              Flip to <span className="font-medium">Implied Assumptions</span>{" "}
-              and let the solver tell you what assumption the market is
-              asking you to underwrite. If the market needs the business to
-              earn 60% on capital for fifteen years — and your honest answer
-              is "probably not" — you have your answer.
-            </li>
-            <li>
-              Use the <span className="font-medium">sensitivity table</span>{" "}
-              to find the variable your conclusion actually rests on. If
-              moving ROIC by one point swings the multiple by 8x, that
-              assumption is doing too much work and deserves more scrutiny
-              than you've given it.
-            </li>
-            <li>
-              For dividend payers, buybacks, or anything you'd hold through a
-              cycle, switch to <span className="font-medium">Shareholder
-              Wealth</span> to project the total return. Watch the attribution:
-              if most of your IRR is coming from multiple expansion rather
-              than business economics, you are not really investing in the
-              company — you are betting on the mood of other investors.
-            </li>
-          </ol>
+          <p>
+            Across all three modes, there are also two underlying model
+            levels. The default, ROIC / Reinvestment, derives earnings
+            growth directly from the underlying economics of the business:
+            growth in any given year equals the return on incremental
+            capital multiplied by the reinvestment rate, and whatever
+            earnings are not reinvested become owner cash flow. We
+            strongly prefer this model because it forces you to take a
+            position on what is actually generating the growth, rather
+            than letting growth float as a free parameter that has no
+            connection to the economics of the business. The alternative,
+            the Simple Growth model, lets you input a growth rate directly,
+            which can be useful for quick back-of-the-envelope work, but it
+            cannot tell apart a business that grows because it earns
+            extraordinary returns on capital from one that grows by
+            consuming all of its earnings to do so.
+          </p>
         </section>
 
         <section className="space-y-3">
           <h2 className="text-xl font-semibold tracking-tight">
-            What this tool isn't
+            How we use it
           </h2>
           <p>
-            It is not a three-statement model. It is not a screener. It is
-            not a stock-picking oracle. It will not tell you which businesses
-            are durable, who is competent to run them, or whether the cash
-            flows you've projected are remotely realistic. Those are the
-            hard questions and they take years of reading, modeling, talking
-            to operators, and being wrong in expensive ways. This tool just
-            tells you what your answers add up to.
+            In practice, here is roughly the order of operations that we
+            follow when we are using the tool to test a company against
+            our view.
           </p>
           <p>
-            Peter Lynch once asked a professional money manager what their
-            80th-largest position did. The manager couldn't say. The lesson
-            wasn't really about position counts — it was that a number on a
-            screen tells you nothing about the business behind it. This app
-            is on the same side of that fence: useful only after the work
-            of understanding the business is already done.
+            We start in ROIC / Reinvestment mode with our honest view of
+            the business. The Stage 1 inputs (ROIC, reinvestment rate,
+            duration) capture the period during which we expect the
+            company to earn returns meaningfully above its cost of
+            capital, and the mature inputs capture what the business
+            settles into after competition has compressed those returns.
+            We set the discount rate based on the risk profile of the
+            company and the prevailing rate environment.
+          </p>
+          <p>
+            We then look at two outputs. The first is the justified P/E,
+            which is the headline number. The second is the discount-to-
+            intrinsic pill next to it, which tells us in one number
+            whether the market is offering the business at a discount, at
+            roughly fair value, or at a premium, all relative to the
+            assumptions we just entered.
+          </p>
+          <p>
+            If the discount or premium looks large, we move down the page
+            to the sensitivity table and try to identify which assumption
+            our conclusion most depends on. A justified P/E that swings
+            substantially with a one-point change in ROIC is a justified
+            P/E that we should not place much confidence in. When a small
+            change in input produces a large change in output, we have not
+            really learned anything new about the company; we have only
+            translated one guess into another.
+          </p>
+          <p>
+            When we suspect that the market is pricing in something we
+            have not, we move to Implied Assumptions and let the solver
+            back into what the market needs to be true. If the answer is
+            something the business can plausibly deliver, we take that as
+            evidence that the market is being roughly reasonable. If the
+            answer is implausible (for instance, the market needing the
+            business to earn 60% on incremental capital for fifteen
+            consecutive years), then either we have found a meaningfully
+            mispriced security or we are missing something material about
+            the company that other investors understand and we do not.
+          </p>
+          <p>
+            For dividend payers, share-repurchase-heavy companies, or any
+            company where capital returned to shareholders is expected to
+            be a material fraction of total return, we switch to
+            Shareholder Wealth and look at the IRR breakdown. The
+            attribution is the most useful part of that view: if our IRR
+            is coming mostly from a multiple expanding rather than from
+            the business's own economics, then we are not really
+            investing in the company. We are betting on what other
+            investors will be willing to pay for it later, which is a
+            very different exercise.
           </p>
         </section>
 
         <section className="space-y-3">
-          <h2 className="text-xl font-semibold tracking-tight">A few notes</h2>
-          <ul className="space-y-1 text-sm text-ink-700">
-            <li>Every calculation runs in your browser. Nothing is sent anywhere.</li>
-            <li>Your assumptions are saved in this browser. Switch machines and they reset.</li>
-            <li>The year-by-year projection exports to CSV; the written summary copies to clipboard.</li>
-            <li>The "How this is calculated" panel at the bottom of the calculator shows every formula.</li>
-          </ul>
+          <h2 className="text-xl font-semibold tracking-tight">
+            What this tool does not do
+          </h2>
+          <p>
+            There are a number of things that this tool is not intended to
+            do, and it is worth being explicit about them. It is not a
+            substitute for a three-statement model. It is not a screener,
+            and it will not generate investment ideas on its own. It
+            cannot evaluate the quality of management, the durability of
+            the moat, or the realism of the cash flows that you have
+            projected. Those are all far harder questions, and the only
+            way we know to answer them is by reading annual reports
+            carefully, talking to operators and competitors, building
+            relationships with management teams over time, and being
+            wrong in expensive ways over many years. What this tool does
+            is take the answers you have already worked out about a
+            business and show you what those answers add up to in terms
+            of the multiple they justify.
+          </p>
         </section>
 
-        <div className="pt-6 border-t border-ink-200 space-y-4">
-          <p className="text-ink-700">
-            That's most of it. The rest is in the calculator.
+        <section className="space-y-3">
+          <h2 className="text-xl font-semibold tracking-tight">
+            A few practical notes
+          </h2>
+          <p>
+            Every calculation runs locally in your browser, and nothing is
+            sent to a server. Your assumptions are saved in your browser's
+            local storage, so closing the tab is safe, but using the tool
+            on a different device will reset the inputs to defaults. There
+            is a collapsible section at the bottom of the calculator
+            called "How this is calculated" that shows every underlying
+            formula the tool uses, so that nothing about the math is
+            hidden. The year-by-year projection can be exported as a CSV,
+            and the written summary of the assumptions and results can be
+            copied to your clipboard for use in your own notes.
           </p>
-          <p className="text-sm text-ink-500">— Nithin</p>
+        </section>
+
+        <div className="pt-6 border-t border-ink-200 space-y-3">
+          <p>
+            That covers what the tool does and how we use it. The rest is
+            in the calculator itself.
+          </p>
+          <p className="text-sm text-ink-500">Best, Nithin</p>
           <button
             onClick={onStart}
             className="px-4 py-2 rounded-md bg-ink-800 text-white text-sm font-medium hover:bg-ink-900 transition-colors"
           >
-            {alreadySeen ? "Back to calculator" : "Open the calculator →"}
+            {alreadySeen ? "Back to calculator" : "Open the calculator"}
           </button>
         </div>
       </main>
