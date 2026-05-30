@@ -25,8 +25,9 @@ export function Intro({ onStart, alreadySeen }: Props) {
         </div>
       </header>
 
-      <main className="max-w-3xl mx-auto px-4 sm:px-6 py-10 space-y-8 text-ink-800 leading-relaxed">
-        <section className="space-y-3">
+      <main className="max-w-3xl mx-auto px-4 sm:px-6 py-10 space-y-10 text-ink-800 leading-relaxed">
+        {/* ── Lede ── */}
+        <section>
           <p>
             The tool that this page introduces does a single job. Given your
             assumptions about a business (how fast its earnings can grow, how
@@ -39,6 +40,7 @@ export function Intro({ onStart, alreadySeen }: Props) {
           </p>
         </section>
 
+        {/* ── Why multiples hide more than they show ── */}
         <section className="space-y-3">
           <h2 className="text-xl font-semibold tracking-tight">
             Why a multiple alone hides more than it shows
@@ -47,7 +49,7 @@ export function Intro({ onStart, alreadySeen }: Props) {
             A P/E ratio compresses a significant amount of information into a single
             number. That compression is convenient for screening, but it
             tends to hide exactly the things that matter most to a long-term
-            investor. Two businesses can both trade at 25x earnings while
+            investor. Two businesses can both trade at 25× earnings while
             being entirely different businesses underneath. One of them
             may earn 40% on incremental capital and reinvest only a small
             fraction of its earnings to grow, paying the rest out to owners.
@@ -61,7 +63,8 @@ export function Intro({ onStart, alreadySeen }: Props) {
           </p>
         </section>
 
-        <section className="space-y-3">
+        {/* ── The three modes ── */}
+        <section className="space-y-6">
           <h2 className="text-xl font-semibold tracking-tight">
             The three modes
           </h2>
@@ -70,74 +73,104 @@ export function Intro({ onStart, alreadySeen }: Props) {
             toggles at the top of the calculator. Each one is built around
             a different question.
           </p>
-          <p>
-            The first mode, Justified Multiple, is where most of the work
-            gets done. You enter your view of the business (your estimate
-            of its incremental return on capital, the fraction of earnings
-            it needs to reinvest to sustain that return, how long the
-            high-return Stage 1 period continues, and your chosen discount
-            rate), and the tool returns the P/E that those inputs justify.
-            It also compares that justified multiple against the current
-            market multiple and expresses the difference as a discount or a
-            premium to intrinsic value. A positive discount indicates that
-            the market is offering the business below what your assumptions
-            say it is worth, and a negative number means the market is
-            asking you to pay more than your view supports.
-          </p>
-          <p>
-            The second mode, Implied Assumptions, runs the same model in
-            reverse. You enter today's market multiple, choose a variable
-            to solve for (such as ROIC, reinvestment rate, Stage 1
-            duration, discount rate, mature ROIC, or mature reinvestment
-            rate), and the tool solves for the value of that variable that
-            would make the current multiple fair. This is useful for asking
-            the question, "What is the market asking me to believe at
-            today's price?" Whether that belief is reasonable is, of
-            course, a separate question, and one you have to answer
-            yourself.
-          </p>
-          <p>
-            The third mode, Shareholder Wealth, takes the perspective of
-            an investor buying the company and holding it for some number
-            of years. You enter the multiple you would pay today, the
-            multiple you would accept on exit, the holding period, and the
-            rate at which you would reinvest payouts received along the
-            way. The tool returns an investor IRR and breaks that return
-            down into its parts, showing how much came from earnings
-            growth, how much from the change in multiple, how much from
-            the payouts themselves, and how much from your external
-            reinvestment of those payouts. We use this mode for dividend
-            payers, repurchase-heavy companies, and any situation in which
-            we want to keep the company's underlying economics distinct
-            from our own portfolio's reinvestment decisions.
-          </p>
+
+          {/* Mode 1 */}
+          <div className="border-l-2 border-ink-200 pl-5 space-y-2">
+            <h3 className="text-sm font-semibold uppercase tracking-wide text-ink-500">
+              Mode 1 — Justified Multiple
+            </h3>
+            <p>
+              This is where most of the work gets done. You enter your view
+              of the business (your estimate of its incremental return on
+              capital, the fraction of earnings it needs to reinvest to
+              sustain that return, how long the high-return Stage 1 period
+              continues, and your chosen discount rate), and the tool returns
+              the P/E that those inputs justify. It also compares that
+              justified multiple against the current market multiple and
+              expresses the difference as a{" "}
+              <span className="font-medium">discount or a premium to
+              intrinsic value</span>. A positive discount indicates that the
+              market is offering the business below what your assumptions say
+              it is worth, and a negative number means the market is asking
+              you to pay more than your view supports.
+            </p>
+          </div>
+
+          {/* Mode 2 */}
+          <div className="border-l-2 border-ink-200 pl-5 space-y-2">
+            <h3 className="text-sm font-semibold uppercase tracking-wide text-ink-500">
+              Mode 2 — Implied Assumptions
+            </h3>
+            <p>
+              This mode runs the same model in reverse. You enter today's
+              market multiple, choose a variable to solve for (such as ROIC,
+              reinvestment rate, Stage 1 duration, discount rate, mature
+              ROIC, or mature reinvestment rate), and the tool solves for the
+              value of that variable that would make the current multiple
+              fair. This is useful for asking the question,{" "}
+              <span className="font-medium italic">
+                "What is the market asking me to believe at today's price?"
+              </span>{" "}
+              Whether that belief is reasonable is, of course, a separate
+              question, and one you have to answer yourself.
+            </p>
+          </div>
+
+          {/* Mode 3 */}
+          <div className="border-l-2 border-ink-200 pl-5 space-y-2">
+            <h3 className="text-sm font-semibold uppercase tracking-wide text-ink-500">
+              Mode 3 — Shareholder Wealth
+            </h3>
+            <p>
+              This mode takes the perspective of an investor buying the
+              company and holding it for some number of years. You enter the
+              multiple you would pay today, the multiple you would accept on
+              exit, the holding period, and the rate at which you would
+              reinvest payouts received along the way. The tool returns an
+              investor IRR and breaks that return down into its parts,
+              showing how much came from earnings growth, how much from the
+              change in multiple, how much from the payouts themselves, and
+              how much from your external reinvestment of those payouts. We
+              use this mode for dividend payers, repurchase-heavy companies,
+              and any situation in which we want to keep the company's
+              underlying economics distinct from our own portfolio's
+              reinvestment decisions.
+            </p>
+          </div>
         </section>
 
+        {/* ── Model levels ── */}
         <section className="space-y-3">
           <h2 className="text-xl font-semibold tracking-tight">
             The default model and the simple alternative
           </h2>
           <p>
             Across all three modes, there are also two underlying model
-            levels. The default, ROIC / Reinvestment, derives earnings
-            growth directly from the underlying economics of the business:
-            growth in any given year equals the return on incremental
-            capital multiplied by the reinvestment rate, and whatever
-            earnings are not reinvested become owner cash flow. We
+            levels.
+          </p>
+          <p>
+            The default,{" "}
+            <span className="font-medium">ROIC / Reinvestment</span>,
+            derives earnings growth directly from the underlying economics
+            of the business: growth in any given year equals the return on
+            incremental capital multiplied by the reinvestment rate, and
+            whatever earnings are not reinvested become owner cash flow. We
             strongly prefer this model because it forces you to take a
-            position on what is actually generating the growth, rather
-            than letting growth float as a free parameter that has no
-            connection to the economics of the business. The alternative,
-            the Simple Growth model, lets you input a growth rate directly,
-            which can be useful for quick back-of-the-envelope work, but it
-            cannot tell apart a business that grows because it earns
-            extraordinary returns on capital from one that grows by
-            consuming all of its earnings to do so.
+            position on what is actually generating the growth, rather than
+            letting growth float as a free parameter that has no connection
+            to the economics of the business.
+          </p>
+          <p>
+            The alternative, the{" "}
+            <span className="font-medium">Simple Growth</span> model, lets
+            you input a growth rate directly, which can be useful for quick
+            back-of-the-envelope work, but it cannot tell apart a business
+            that grows because it earns extraordinary returns on capital
+            from one that grows by consuming all of its earnings to do so.
           </p>
         </section>
 
-        
-
+        {/* ── Sign-off ── */}
         <div className="pt-6 border-t border-ink-200 space-y-3">
           <p className="text-sm text-ink-500">Best, Nithin</p>
           <button
